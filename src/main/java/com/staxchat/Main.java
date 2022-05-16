@@ -1,7 +1,10 @@
 package com.staxchat;
 
+import com.staxchat.constants.Environment;
+import com.staxchat.core.Server;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world");
+        Server.start(Environment.LOCAL);
     }
 }

@@ -24,14 +24,14 @@ public class Server {
 
             serverBootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
-                protected void initChannel(SocketChannel socketChannel) throws Exception {
+                protected void initChannel(SocketChannel socketChannel) {
                     socketChannel.pipeline().addLast(new StaxChatHandler());
                 }
             });
         } catch (Exception exception) {
             exception.printStackTrace();
             EmailSender.send();
-        }finally {
+        } finally {
             try {
                 group.shutdownGracefully().sync();
             } catch (InterruptedException e) {

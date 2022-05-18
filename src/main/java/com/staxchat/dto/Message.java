@@ -1,6 +1,6 @@
 package com.staxchat.dto;
 
-public class InitialMessage {
+public class Message {
     private MessageType messageType;
     private String body;
 

@@ -9,7 +9,6 @@ public class ErrorResponse {
     private final ChannelHandlerContext context;
     private ErrorType errorType;
     private String message;
-
     private boolean closeSocket;
 
 

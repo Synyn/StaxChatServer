@@ -5,7 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.staxchat.constants.ErrorMessages;
 import com.staxchat.dto.ErrorResponse;
 import com.staxchat.dto.ErrorType;
-import com.staxchat.dto.InitialMessage;
+import com.staxchat.dto.Message;
+import com.staxchat.message.MessageFunction;
+import com.staxchat.message.MessageFactory;
+import com.staxchax.core.exception.StaxException;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
@@ -23,10 +26,10 @@ public class StaxChatHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        InitialMessage initialMessage;
+        Message message;
 
         try {
-            initialMessage = formatMessage(msg);
+            message = formatMessage(msg);
         } catch (JsonProcessingException processingException) {
             ErrorResponse response =
                     new ErrorResponse.Builder(ctx)
@@ -36,7 +39,22 @@ public class StaxChatHandler extends ChannelInboundHandlerAdapter {
                             .build();
 
             response.send();
+            return;
         }
+
+        MessageFunction messageFunction = MessageFactory.createMessage(message, ctx);
+        try {
+            messageFunction.validate();
+            messageFunction.execute();
+        } catch (StaxException staxException) {
+            ErrorResponse response =
+                    new ErrorResponse.Builder(ctx)
+                            .withErrorType(ErrorType.WARNING)
+                            .withMessage(staxException.getMessage())
+                            .closeSocket().build();
+            response.send();
+        }
+
     }
 
     /**
@@ -46,13 +64,13 @@ public class StaxChatHandler extends ChannelInboundHandlerAdapter {
      * <p>
      * If the decoding(unmarshalling) of the json string fails, we will return an error message and close the socket.
      */
-    private InitialMessage formatMessage(Object msg) throws JsonProcessingException {
+    private Message formatMessage(Object msg) throws JsonProcessingException {
         ByteBuf byteBuf = (ByteBuf) msg;
         String jsonMessage = byteBuf.toString(CharsetUtil.UTF_8);
 
         logger.info("JsonMessage -> " + jsonMessage);
 
-        return mapper.readValue(jsonMessage, InitialMessage.class);
+        return mapper.readValue(jsonMessage, Message.class);
     }
 
     @Override

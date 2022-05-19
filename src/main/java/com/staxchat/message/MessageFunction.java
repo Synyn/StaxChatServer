@@ -4,9 +4,9 @@ import com.staxchat.dto.Message;
 import io.netty.channel.ChannelHandlerContext;
 
 public abstract class MessageFunction {
-    private ChannelHandlerContext ctx;
+    protected ChannelHandlerContext ctx;
 
-    private Message message;
+    protected Message message;
 
     MessageFunction(ChannelHandlerContext ctx, Message message) {
         this.ctx = ctx;
@@ -18,4 +18,7 @@ public abstract class MessageFunction {
     public void validate() {
 
     }
+
+
+
 }

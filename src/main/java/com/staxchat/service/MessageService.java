@@ -23,4 +23,8 @@ public class MessageService {
         return mapper.readValue(json, clazz);
     }
 
+    public Object getMessage(String jsonMessage, Class<?> clazz) throws JsonProcessingException{
+        return mapper.readValue(jsonMessage, clazz);
+    }
+
 }

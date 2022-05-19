@@ -2,7 +2,7 @@ package com.staxchat.dto;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.staxchat.service.EmailService;
-import com.staxchat.service.MessageService;
+import com.staxchat.util.MessageUtil;
 import io.netty.channel.ChannelHandlerContext;
 
 public class ErrorResponse {
@@ -30,7 +30,7 @@ public class ErrorResponse {
 
     public void send() {
         try {
-            MessageService.sendMessage(context, this);
+            MessageUtil.sendMessage(context, this);
         } catch (JsonProcessingException exception) {
             //TODO: When email written
             EmailService.sendEmail();

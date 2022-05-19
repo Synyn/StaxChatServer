@@ -10,7 +10,7 @@ public class HelloWorldMessageFunction extends MessageFunction {
 
     @Override
     public void execute() {
-
+        String jsonBody = message.getBody();
     }
 
     @Override

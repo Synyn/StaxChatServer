@@ -45,13 +45,6 @@ public abstract class MessageFunction {
         }
     }
 
-    protected Object getMessage(Object message, Class<?> clazz) throws JsonProcessingException {
-        ByteBuf inBuff = (ByteBuf) message;
-        String json = inBuff.toString(Constants.DEFAULT_CHARSET);
-
-        return mapper.readValue(json, clazz);
-    }
-
     protected Object getMessage(JsonNode node, Class<?> clazz) throws JsonProcessingException {
         return mapper.treeToValue(node, clazz);
     }

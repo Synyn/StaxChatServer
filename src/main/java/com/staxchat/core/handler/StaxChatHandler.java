@@ -8,6 +8,7 @@ import com.staxchat.dto.ErrorType;
 import com.staxchat.dto.Message;
 import com.staxchat.message.MessageFunction;
 import com.staxchat.message.MessageFactory;
+import com.staxchat.util.MessageUtil;
 import com.staxchax.core.exception.StaxException;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -29,7 +30,16 @@ public class StaxChatHandler extends ChannelInboundHandlerAdapter {
         Message message;
 
         try {
-            message = formatMessage(msg);
+
+            /**
+             * This method will take the raw message and convert it to the initial message request.
+             * <p>
+             * The initial message consists of a @MessageType and a Body, which is basically a dynamic json object.
+             * <p>
+             * If the decoding(unmarshalling) of the json string fails, we will return an error message and close the socket.
+             */
+
+            message = (Message) MessageUtil.getMessage(msg, Message.class);
         } catch (JsonProcessingException processingException) {
             processingException.printStackTrace();
             ErrorResponse response =
@@ -58,21 +68,6 @@ public class StaxChatHandler extends ChannelInboundHandlerAdapter {
 
     }
 
-    /**
-     * This method will take the raw message and convert it to the initial message request.
-     * <p>
-     * The initial message consists of a @MessageType and a Body, which is basically a json formatted string.
-     * <p>
-     * If the decoding(unmarshalling) of the json string fails, we will return an error message and close the socket.
-     */
-    private Message formatMessage(Object msg) throws JsonProcessingException {
-        ByteBuf byteBuf = (ByteBuf) msg;
-        String jsonMessage = byteBuf.toString(CharsetUtil.UTF_8);
-
-        logger.info("JsonMessage -> " + jsonMessage);
-
-        return mapper.readValue(jsonMessage, Message.class);
-    }
 
 //    @Override
 //    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {

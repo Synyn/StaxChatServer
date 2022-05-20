@@ -4,12 +4,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.staxchat.service.EmailService;
 import com.staxchat.util.MessageUtil;
 import io.netty.channel.ChannelHandlerContext;
+import org.apache.log4j.Logger;
 
 public class ErrorResponse {
     private final ChannelHandlerContext context;
     private ErrorType errorType;
     private String message;
     private boolean closeSocket;
+
+    private Logger logger = Logger.getLogger(ErrorResponse.class);
 
 
     private ErrorResponse(Builder builder) {
@@ -36,6 +39,7 @@ public class ErrorResponse {
             EmailService.sendEmail();
             context.close();
         }
+
         if (closeSocket && !context.isRemoved()) {
             context.close();
         }

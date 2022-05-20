@@ -31,6 +31,7 @@ public class StaxChatHandler extends ChannelInboundHandlerAdapter {
         try {
             message = formatMessage(msg);
         } catch (JsonProcessingException processingException) {
+            processingException.printStackTrace();
             ErrorResponse response =
                     new ErrorResponse.Builder(ctx)
                             .withErrorType(ErrorType.FATAL)
@@ -73,11 +74,11 @@ public class StaxChatHandler extends ChannelInboundHandlerAdapter {
         return mapper.readValue(jsonMessage, Message.class);
     }
 
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER)
-                .addListener(ChannelFutureListener.CLOSE);
-    }
+//    @Override
+//    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+//        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER);
+//        logger.info("Finished Reading");
+//    }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {

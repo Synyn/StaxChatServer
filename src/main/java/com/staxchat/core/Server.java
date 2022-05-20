@@ -34,6 +34,7 @@ public class Server {
             serverBootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel socketChannel) {
+                    logger.info("Connected -> " + socketChannel.localAddress().getHostName());
                     socketChannel.pipeline().addLast(new StaxChatHandler());
                 }
             });

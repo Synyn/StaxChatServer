@@ -1,14 +1,16 @@
 package com.staxchat.dto;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 public class Message {
     private MessageType messageType;
-    private String body;
+    private JsonNode body;
 
-    public String getBody() {
+    public JsonNode getBody() {
         return body;
     }
 
-    public void setBody(String body) {
+    public void setBody(JsonNode body) {
         this.body = body;
     }
 

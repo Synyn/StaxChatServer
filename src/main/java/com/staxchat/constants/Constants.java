@@ -15,7 +15,12 @@ public class Constants {
     /**
      * Database Config
      */
-    public static final String DB_URL = "jdbc:mysql://localhost:3306/stax_db";
+    public static final String DB_HOSTNAME = "127.0.0.1";
+    public static final Integer DB_PORT = 3306;
+    public static final String DB_NAME = "stax_db";
+    public static final String DB_JDBC_URL = "jdbc:mysql://" + Constants.DB_HOSTNAME + ":" + Constants.DB_PORT + "/" + Constants.DB_NAME;
     public static final String DB_USERNAME = "stax_user";
     public static final String DB_PASSWORD = "test123";
+    public static final int DB_POOL_MAX_CONNECTIONS = 15;
+    public static final long DB_POOL_MAX_IDLE_TIME = 3600;
 }

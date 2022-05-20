@@ -78,6 +78,13 @@ public class StaxChatHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         cause.printStackTrace();
-        ctx.close();
+        logger.info("Thrown Exception !");
+        ErrorResponse response = new ErrorResponse.Builder(ctx)
+                .withErrorType(ErrorType.FATAL)
+                .withMessage(cause.getMessage())
+                .closeSocket()
+                .build();
+
+        response.send();
     }
 }

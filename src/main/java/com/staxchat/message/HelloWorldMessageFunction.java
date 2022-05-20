@@ -8,6 +8,7 @@ import com.staxchat.dto.ErrorType;
 import com.staxchat.dto.HelloWorldMessageRequestDTO;
 import com.staxchat.dto.Message;
 import com.staxchat.util.MessageUtil;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.util.HashMap;
@@ -19,26 +20,17 @@ public class HelloWorldMessageFunction extends MessageFunction {
 
     @Override
     public void execute() {
-        HelloWorldMessageRequestDTO messageRequestDTO;
-        try {
-            messageRequestDTO = (HelloWorldMessageRequestDTO) getMessage(message.getBody(), HelloWorldMessageRequestDTO.class);
-        } catch (JsonProcessingException exception) {
-            ErrorResponse response = new ErrorResponse.Builder(ctx)
-                    .withErrorType(ErrorType.WARNING)
-                    .withMessage(ErrorMessages.JSON_UNMARSHAL_FAILURE)
-                    .build();
-            response.send();
-            return;
-        }
+        HelloWorldMessageRequestDTO messageRequestDTO =
+                (HelloWorldMessageRequestDTO) getMessage(message.getBody(), HelloWorldMessageRequestDTO.class);
 
         String message = messageRequestDTO.getMessage();
-
         HashMap<Object, Object> responseMap = new HashMap<>();
         responseMap.put("message", message);
 
-        sendMessage(responseMap);
-//            Thread.sleep(100);
-        sendMessage(responseMap);
+        ChannelFuture future = MessageUtil.sendMessage(super.ctx, responseMap);
+        if(future.isSuccess()) {
+            MessageUtil.sendMessage(super.ctx, responseMap);
+        }
 
 //        ctx.close();
 

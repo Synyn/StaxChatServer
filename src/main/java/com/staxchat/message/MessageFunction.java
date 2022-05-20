@@ -11,6 +11,7 @@ import com.staxchat.dto.Message;
 import com.staxchax.core.exception.StaxException;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.log4j.Logger;
 
@@ -34,19 +35,12 @@ public abstract class MessageFunction {
 
     }
 
-    protected void sendMessage(Object json) {
+    protected Object getMessage(JsonNode node, Class<?> clazz) {
         try {
-            String jsonString = mapper.writeValueAsString(json);
-            logger.info("Sending Message -> " + jsonString);
-            ctx.writeAndFlush(Unpooled.copiedBuffer(jsonString, Constants.DEFAULT_CHARSET));
-//            ctx.flush();
-        } catch (JsonProcessingException exception) {
+            return mapper.treeToValue(node, clazz);
+        }catch (JsonProcessingException exception) {
             throw new StaxException(exception.getMessage());
         }
-    }
-
-    protected Object getMessage(JsonNode node, Class<?> clazz) throws JsonProcessingException {
-        return mapper.treeToValue(node, clazz);
     }
 
 

@@ -13,8 +13,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
 }"""
     s.sendall(mess)
-    data = s.recv(1024)
-    s.sendall(mess)
     # print(str(data))
     while True:
         data = s.recv(1024)

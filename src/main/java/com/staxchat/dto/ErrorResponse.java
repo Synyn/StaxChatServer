@@ -3,8 +3,11 @@ package com.staxchat.dto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.staxchat.service.EmailService;
 import com.staxchat.util.MessageUtil;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.log4j.Logger;
+
+import java.util.concurrent.TimeUnit;
 
 public class ErrorResponse {
     private final ChannelHandlerContext context;
@@ -32,15 +35,8 @@ public class ErrorResponse {
     }
 
     public void send() {
-        try {
-            MessageUtil.sendMessage(context, this);
-        } catch (JsonProcessingException exception) {
-            //TODO: When email written
-            EmailService.sendEmail();
-            context.close();
-        }
-
-        if (closeSocket && !context.isRemoved()) {
+        ChannelFuture channelFuture = MessageUtil.sendMessage(context, this);
+        if (channelFuture.isSuccess() && closeSocket) {
             context.close();
         }
     }

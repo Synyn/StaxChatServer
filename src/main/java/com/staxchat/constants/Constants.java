@@ -15,7 +15,7 @@ public class Constants {
     /**
      * Database Config
      */
-    public static final String DB_URL = "jdbc:mysql://localhost:3306/stax_chat_db";
+    public static final String DB_URL = "jdbc:mysql://localhost:3306/stax_db";
     public static final String DB_USERNAME = "stax_user";
     public static final String DB_PASSWORD = "test123";
 }

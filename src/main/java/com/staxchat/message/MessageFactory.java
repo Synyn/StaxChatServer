@@ -12,6 +12,9 @@ public class MessageFactory {
             case HELLO_WORLD -> {
                 return new HelloWorldMessageFunction(ctx, message);
             }
+            case LOGIN -> {
+                return new LoginMessageFunction(ctx, message);
+            }
             default -> {
                 throw new StaxException(ErrorMessages.MESSAGE_TYPE_UNKNOWN);
             }

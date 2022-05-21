@@ -17,7 +17,7 @@ public class UserDao {
      * @throws SQLException - if there is some problem with the SQL
      */
     public static User findUserByUsername(String username) throws SQLException {
-        String sql = "SELECT * FROM user WHERE username = ?";
+        String sql = "SELECT * FROM users WHERE username = ?";
 //        String sql = "SELECT * FROM `user`";
 
         Connection connection = DataSource.getConnection();

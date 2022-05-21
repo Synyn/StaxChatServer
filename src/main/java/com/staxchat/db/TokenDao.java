@@ -20,7 +20,7 @@ public class TokenDao {
         ResultSet resultSet = statement.executeQuery();
 
         if (!resultSet.next()) {
-            throw new SQLDataException(ErrorMessages.TOKEN_NOT_FOUND);
+            return null;
         }
 
         Role role = new Role();

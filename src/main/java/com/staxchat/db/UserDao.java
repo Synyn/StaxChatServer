@@ -22,7 +22,7 @@ public class UserDao {
             ResultSet rowData = statement.executeQuery();
 
             if (!rowData.next()) {
-                throw new StaxException(ErrorMessages.USER_NOT_FOUND);
+                return null;
             }
 
             User user = new User();

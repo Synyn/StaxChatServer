@@ -1,6 +1,5 @@
 package com.staxchat.db.model;
 
-import javax.management.relation.Role;
 
 public class Token {
 

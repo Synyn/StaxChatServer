@@ -64,7 +64,12 @@ public abstract class MessageFunction {
         }
 
         try {
-            this.token = TokenDao.findToken(message.getToken());
+            Token dbToken = TokenDao.findToken(message.getToken());
+
+            if (dbToken == null) {
+                throw new StaxException(ErrorMessages.UNAUTORIZED);
+            }
+
         } catch (SQLException e) {
             throw new StaxException(e.getMessage());
         }

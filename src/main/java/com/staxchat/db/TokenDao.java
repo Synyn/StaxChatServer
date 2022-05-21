@@ -9,6 +9,12 @@ import java.sql.*;
 import java.util.Arrays;
 
 public class TokenDao {
+    /**
+     * Find the token in the database and return the Token with the associated role
+     * @param token - the token that we need to find
+     * @return Token - the token form the db
+     * @throws SQLException - if there is something wrong with the SQL
+     */
     public static Token findToken(String token) throws SQLException {
         Connection connection = DataSource.getConnection();
 

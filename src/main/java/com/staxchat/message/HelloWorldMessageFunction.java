@@ -37,7 +37,12 @@ public class HelloWorldMessageFunction extends MessageFunction {
     }
 
     @Override
-    public void validate() {
+    public void validateRole() {
+
+    }
+
+    @Override
+    public void validateToken() {
 
     }
 }

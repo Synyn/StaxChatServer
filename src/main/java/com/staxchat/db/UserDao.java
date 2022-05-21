@@ -1,8 +1,6 @@
 package com.staxchat.db;
 
-import com.staxchat.constants.ErrorMessages;
 import com.staxchat.db.model.User;
-import com.staxchax.core.exception.StaxException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

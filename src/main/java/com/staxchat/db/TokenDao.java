@@ -1,12 +1,9 @@
 package com.staxchat.db;
 
-import com.staxchat.constants.ErrorMessages;
 import com.staxchat.db.model.Role;
 import com.staxchat.db.model.Token;
 
-import java.awt.*;
 import java.sql.*;
-import java.util.Arrays;
 
 public class TokenDao {
     /**

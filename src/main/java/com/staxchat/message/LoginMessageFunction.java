@@ -9,6 +9,8 @@ import com.staxchax.core.exception.StaxException;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.log4j.Logger;
 
+import java.sql.SQLException;
+
 public class LoginMessageFunction extends MessageFunction {
 
     private Logger logger = Logger.getLogger(LoginMessageFunction.class);
@@ -21,13 +23,18 @@ public class LoginMessageFunction extends MessageFunction {
     public void execute() {
         LoginRequestDTO login = (LoginRequestDTO) getMessage(message.getBody(), LoginRequestDTO.class);
 
-        User user = UserDao.findUserByUsername(login.getUsername());
+        try {
+            User user = UserDao.findUserByUsername(login.getUsername());
 
-        if(user == null) {
-            throw new StaxException(ErrorMessages.USER_NOT_FOUND);
+            if (user == null) {
+                throw new StaxException(ErrorMessages.USER_NOT_FOUND);
+            }
+
+            logger.info("Db User -> " + user.getUsername());
+        } catch (SQLException sqlException) {
+            throw new StaxException(sqlException.getMessage());
         }
 
-        logger.info("Db User -> " + user.getUsername());
     }
 
     @Override

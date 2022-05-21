@@ -1,6 +1,6 @@
 package com.staxchat.message;
 
-import com.staxchat.db.User;
+import com.staxchat.db.model.User;
 import com.staxchat.dto.LoginRequestDTO;
 import com.staxchat.dto.Message;
 import io.netty.channel.ChannelHandlerContext;

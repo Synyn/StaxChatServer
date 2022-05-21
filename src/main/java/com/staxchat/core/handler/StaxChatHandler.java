@@ -2,7 +2,11 @@ package com.staxchat.core.handler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mysql.cj.util.StringUtils;
 import com.staxchat.constants.ErrorMessages;
+import com.staxchat.core.Server;
+import com.staxchat.db.TokenDao;
+import com.staxchat.db.model.Token;
 import com.staxchat.dto.ErrorResponse;
 import com.staxchat.dto.ErrorType;
 import com.staxchat.dto.Message;
@@ -55,8 +59,11 @@ public class StaxChatHandler extends ChannelInboundHandlerAdapter {
 
         MessageFunction messageFunction = MessageFactory.createMessage(message, ctx);
         try {
-            messageFunction.validate();
+            messageFunction.validateToken();
+            messageFunction.validateRole();
+
             messageFunction.execute();
+
         } catch (StaxException staxException) {
             ErrorResponse response =
                     new ErrorResponse.Builder(ctx)
@@ -67,7 +74,6 @@ public class StaxChatHandler extends ChannelInboundHandlerAdapter {
         }
 
     }
-
 
 //    @Override
 //    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {

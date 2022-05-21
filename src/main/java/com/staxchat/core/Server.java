@@ -5,6 +5,7 @@ import com.staxchat.core.handler.StaxChatHandler;
 import com.staxchat.email.EmailSender;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -14,10 +15,22 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import java.net.InetSocketAddress;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class Server {
 
     private static Logger logger = Logger.getLogger(StaxChatHandler.class);
+
+    private static SortedMap<String, ChannelHandlerContext> clients = new TreeMap<>();
+
+    public static void addClient(String token, ChannelHandlerContext socket){
+        clients.put(token, socket);
+    }
+
+    public static ChannelHandlerContext getClient(String token) {
+        return clients.get(token);
+    }
 
     public static void start() {
 

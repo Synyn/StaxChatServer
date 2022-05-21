@@ -5,4 +5,6 @@ public class ErrorMessages {
     public static final String MESSAGE_TYPE_UNKNOWN = "This message type is unknown.";
     public static final String USER_NOT_FOUND = "The user was not found.";
     public static final String UNKNOWN_ERROR = "Unknown Error";
+    public static final String UNAUTORIZED = "Unauthorized";
+    public static final String TOKEN_NOT_FOUND = "Could not find the token";
 }

@@ -3,7 +3,7 @@ package com.staxchat.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.staxchat.constants.Constants;
-import com.staxchax.core.exception.StaxException;
+import com.staxchat.core.exception.StaxException;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;

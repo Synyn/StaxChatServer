@@ -1,4 +1,4 @@
-package com.staxchax.core.exception;
+package com.staxchat.core.exception;
 
 public class StaxException extends RuntimeException {
     public StaxException(String message) {

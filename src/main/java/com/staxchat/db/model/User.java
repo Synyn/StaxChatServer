@@ -1,12 +1,7 @@
 package com.staxchat.db.model;
 
-import com.staxchat.constants.ErrorMessages;
 import com.staxchat.db.BaseEntity;
-import com.staxchat.db.DataSource;
-import com.staxchax.core.exception.StaxException;
 import org.apache.log4j.Logger;
-
-import java.sql.*;
 
 
 public class User extends BaseEntity {

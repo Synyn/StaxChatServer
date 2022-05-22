@@ -1,8 +1,10 @@
-package com.staxchat.message;
+package com.staxchat.message.core;
 
 import com.staxchat.constants.ErrorMessages;
 import com.staxchat.dto.Message;
-import com.staxchax.core.exception.StaxException;
+import com.staxchat.core.exception.StaxException;
+import com.staxchat.message.HelloWorldMessageFunction;
+import com.staxchat.message.LoginMessageFunction;
 import io.netty.channel.ChannelHandlerContext;
 
 public class MessageFactory {

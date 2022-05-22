@@ -2,24 +2,16 @@ package com.staxchat.core.handler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mysql.cj.util.StringUtils;
 import com.staxchat.constants.ErrorMessages;
-import com.staxchat.core.Server;
-import com.staxchat.db.TokenDao;
-import com.staxchat.db.model.Token;
 import com.staxchat.dto.ErrorResponse;
 import com.staxchat.dto.ErrorType;
 import com.staxchat.dto.Message;
-import com.staxchat.message.MessageFunction;
-import com.staxchat.message.MessageFactory;
+import com.staxchat.message.core.MessageFunction;
+import com.staxchat.message.core.MessageFactory;
 import com.staxchat.util.MessageUtil;
-import com.staxchax.core.exception.StaxException;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelFutureListener;
+import com.staxchat.core.exception.StaxException;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.util.CharsetUtil;
 import org.apache.log4j.Logger;
 
 

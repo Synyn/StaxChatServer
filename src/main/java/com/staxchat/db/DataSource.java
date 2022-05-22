@@ -2,7 +2,7 @@ package com.staxchat.db;
 
 
 import com.staxchat.constants.Constants;
-import com.staxchax.core.exception.StaxException;
+import com.staxchat.core.exception.StaxException;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 

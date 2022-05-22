@@ -5,7 +5,8 @@ import com.staxchat.db.UserDao;
 import com.staxchat.db.model.User;
 import com.staxchat.dto.LoginRequestDTO;
 import com.staxchat.dto.Message;
-import com.staxchax.core.exception.StaxException;
+import com.staxchat.core.exception.StaxException;
+import com.staxchat.message.core.MessageFunction;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.log4j.Logger;
 

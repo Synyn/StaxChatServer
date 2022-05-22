@@ -30,7 +30,7 @@ public class LoginMessageFunction extends MessageFunction {
             if (user == null) {
                 throw new StaxException(ErrorMessages.USER_NOT_FOUND);
             }
-
+            // TODO: Handle the login functionality
             logger.info("Db User -> " + user.getUsername());
         } catch (SQLException sqlException) {
             throw new StaxException(sqlException.getMessage());

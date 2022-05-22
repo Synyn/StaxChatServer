@@ -35,6 +35,9 @@ public class UserDao {
         user.setUsername(rowData.getString("username"));
         user.setPassword(rowData.getString("password"));
         user.setToken(rowData.getString("token"));
+        user.setEmail(rowData.getString("email"));
+        user.setDateOfBirth(rowData.getDate("date_of_birth"));
+        user.setDateOfRegister(rowData.getDate("date_of_register"));
 
         return user;
 

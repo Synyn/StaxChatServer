@@ -7,10 +7,12 @@ import com.staxchat.db.model.User;
 import com.staxchat.dto.Message;
 import com.staxchat.dto.RegisterMessage;
 import com.staxchat.message.core.MessageFunction;
+import com.staxchat.util.DateTimeUtils;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.commons.lang3.StringUtils;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.Objects;
 
 public class RegisterFunctionality extends MessageFunction {
@@ -24,7 +26,9 @@ public class RegisterFunctionality extends MessageFunction {
         RegisterMessage registerMessage = (RegisterMessage) getMessage(message.getBody(), RegisterMessage.class);
 
         validateRegister(registerMessage);
-        
+
+        Date now = DateTimeUtils.now();
+
 
 
     }

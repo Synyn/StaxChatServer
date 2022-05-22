@@ -19,6 +19,10 @@ CREATE TABLE users (
      FOREIGN KEY(token) REFERENCES tokens(token)
 );
 
+ALTER TABLE users ADD COLUMN email VARCHAR(255) NOT NULL;
+ALTER TABLE users ADD COLUMN date_of_birth DATE NOT NULL;
+ALTER TABLE users ADD COLUMN date_of_register DATETIME NOT NULL;
+
 
 
 
